@@ -1,5 +1,5 @@
 import java.util.List;
-
+import java.util.Random;
 /**
  * A class representing shared characteristics of animals.
  * 
@@ -14,6 +14,9 @@ public abstract class Animal
     private Field field;
     // The animal's position in the field.
     private Location location;
+    // The animal's age
+    private int age;
+    private static final Random rand = Randomizer.getRandom();
     
     /**
      * Create a new animal at location in field.
@@ -26,6 +29,7 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
+        age = 0;
     }
     
     /**
@@ -88,4 +92,35 @@ public abstract class Animal
     {
         return field;
     }
+    public void setAge(int age)
+    {
+        this.age = age;
+    }
+    public int getAge()
+    {
+        return age;
+    }
+    public boolean canBreed()
+    {
+        return age >= getBreedingAge();
+    }
+    abstract protected int getBreedingAge();
+    public void incrementAge()
+    {
+        age++;
+        if(age > getMaxAge()) {
+            setDead();
+        }
+    }
+    abstract protected int getMaxAge();
+    public int breed()
+    {
+        int births = 0;
+        if(canBreed() && rand.nextDouble() <= getBreedingProb()) {
+            births = rand.nextInt(getMaxLitter()) + 1;
+        }
+        return births;
+    }
+    abstract protected int getMaxLitter();
+    abstract protected double getBreedingProb();
 }

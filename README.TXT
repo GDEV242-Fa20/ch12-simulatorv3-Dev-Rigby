@@ -20,3 +20,11 @@ How to start:
         + simulateOneStep - for a single step.
         + simulate - and supply a number (say 10) for that many steps.
         + runLongSimulation - for a simulation of 500 steps.
+
+
+
+
+------BRIAN MCMAHON-----
+I added the bear animal and moved all the required methods to the animal class.
+I made it so that the bear population remained small in comparison to the other two.
+This animal acts in a very similar way to the fox.
